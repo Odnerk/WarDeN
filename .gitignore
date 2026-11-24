@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.Python
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# LlamaIndex / Vector store cache
+storage/
+.cache/
+*.faiss
+*.index
+
+# HuggingFace model cache
+~/.cache/huggingface/
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secrets / environment files
+.env
+.env.*
+*.key
+
+# Logs
+*.log
+logs/
