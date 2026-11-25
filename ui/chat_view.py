@@ -6,7 +6,7 @@ from dataclasses import asdict
 
 import streamlit as st
 
-from ui.mocks import (
+from ui.backend import (
     MAX_INPUT_CHARS,
     CampaignState,
     ChatMessage,

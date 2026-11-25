@@ -6,7 +6,7 @@ import re
 
 import streamlit as st
 
-from ui.mocks import (
+from ui.backend import (
     CampaignState,
     campaign_from_json,
     campaign_to_json,

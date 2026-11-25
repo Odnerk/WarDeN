@@ -5,7 +5,7 @@ from __future__ import annotations
 import streamlit as st
 
 from ui.chat_view import render_chat_view
-from ui.mocks import CampaignState
+from ui.backend import CampaignState
 from ui.setup_view import render_setup_view
 from ui.sidebar_sheet import render_sidebar_sheet
 from ui.styles import inject_global_styles, render_top_bar
