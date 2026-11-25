@@ -417,7 +417,42 @@ div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssista
     border-radius: 2px;
     padding: 0.75rem 0.8rem;
     background: #181B1E;
-    min-height: 290px;
+    height: 395px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}}
+
+[class*="st-key-class_card_wrap_"] {{
+    position: relative !important;
+}}
+
+[class*="st-key-class_card_wrap_"] > div:has(button) {{
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 20 !important;
+    margin: 0 !important;
+}}
+
+[class*="st-key-class_card_wrap_"] div[data-testid="stButton"],
+[class*="st-key-class_card_wrap_"] div[data-testid="stButton"] > button {{
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 395px !important;
+    opacity: 0 !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}}
+
+[class*="st-key-class_card_wrap_"]:hover .t-class-card {{
+    border-color: var(--t-cyan) !important;
 }}
 
 .t-class-card-selected {{
@@ -430,19 +465,33 @@ div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssista
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 0.4rem;
     margin-bottom: 0.55rem;
 }}
 
 .t-ascii-box {{
     border: 1px solid var(--t-border);
     background: #131517;
-    padding: 0.35rem 0.55rem;
+    padding: 0.35rem 0.45rem;
     color: var(--t-cyan);
-    font-size: 0.66rem;
+    font-size: 0.64rem;
     line-height: 1.12;
     white-space: pre;
     font-weight: 700;
     overflow: hidden;
+    height: 6.4rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}}
+
+.t-radio-tag {{
+    white-space: nowrap;
+    flex-shrink: 0;
+    line-height: 1.2;
 }}
 
 .t-ascii-sprite {{
@@ -1025,11 +1074,15 @@ def render_class_card(
     ]
     abilities_line = _esc(" · ".join(ability_names)) if ability_names else "—"
 
-    card_cls = f"t-class-card t-class-card-{safe_idx}"
-    radio_html = (
-        '<span class="t-radio-tag t-radio-tag-active t-dot-on">[●]</span>'
-        '<span class="t-radio-tag t-dot-off">[ ]</span>'
+    card_cls = (
+        f"t-class-card t-class-card-{safe_idx} t-class-card-selected"
+        if selected
+        else f"t-class-card t-class-card-{safe_idx}"
     )
+    if selected:
+        radio_html = '<span class="t-radio-tag t-radio-tag-active">[●]</span>'
+    else:
+        radio_html = '<span class="t-radio-tag">[ ]</span>'
 
     st.html(
         f'<div class="{card_cls}">'
@@ -1044,7 +1097,7 @@ def render_class_card(
         f'<div class="t-kv-row"><span class="t-kv-key">Defense:</span><span class="t-kv-val">{defense}</span></div>'
         f'<div class="t-kv-row"><span class="t-kv-key">Magic:</span><span class="t-kv-val">{magic}</span></div>'
         f'<div class="t-kv-row"><span class="t-kv-key">Speed:</span><span class="t-kv-val">{speed}</span></div>'
-        '<div class="t-abilities-foot">'
+        '<div class="t-abilities-foot" style="margin-top:auto;">'
         '<div class="t-eyebrow" style="margin-bottom:0.1rem;">ABILITIES</div>'
         f'<div class="t-abilities-text">{abilities_line}</div>'
         "</div>"
