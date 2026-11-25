@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Forest",
+    "atmosphere": "Towering ancient oaks filter pale emerald light through a canopy thick with moss and birdsong.",
+    "encounter_hooks": [
+      "A moss-covered waystone hums beside a forked woodland trail.",
+      "Fresh claw marks scar the bark near an abandoned ranger camp.",
+      "Lanternlight flickers inside a hollow elder tree ahead."
+    ]
+  },
+  {
+    "name": "Mountains",
+    "atmosphere": "Jagged granite ridges rise above swirling mist, where cold winds carry the clang of distant stone.",
+    "encounter_hooks": [
+      "A collapsed dwarven watchtower guards a narrow cliffside pass.",
+      "Carved runes along a rope bridge warn of an ancient guardian.",
+      "Echoing footsteps ring out from a windswept stone archway."
+    ]
+  },
+  {
+    "name": "Coast",
+    "atmosphere": "Salt spray crashes against basalt sea stacks beneath brooding grey skies and circling gulls.",
+    "encounter_hooks": [
+      "A barnacle-crusted chest lies wedged in the ribs of a wrecked galley.",
+      "Tidewater reveals sunken stairs leading into a sea-carved shrine.",
+      "A lone lighthouse keeper signals frantically from the cliff edge."
+    ]
+  },
+  {
+    "name": "Swamp",
+    "atmosphere": "Twisted cypress roots rise from black mire, veiled in drifting marsh gas and pale bog-lights.",
+    "encounter_hooks": [
+      "Rotting boardwalks wind toward a sunken bell tower in the fen.",
+      "Pale wisps drift above a circle of standing stones half-submerged in mud.",
+      "Bubbles break the murky water beside a mossy stone altar."
+    ]
+  },
+  {
+    "name": "Cave",
+    "atmosphere": "Damp limestone caverns glitter with damp stalactites and faint veins of luminescent crystal.",
+    "encounter_hooks": [
+      "A subterranean river flows past a sealed bronze vault door.",
+      "Scattered mining tools surround a freshly breached chamber.",
+      "Cold drafts carry a metallic rattle from deeper within the tunnel."
+    ]
+  },
+  {
+    "name": "Desert",
+    "atmosphere": "Endless amber dunes shimmer under a relentless sun, hiding buried sandstone obelisks.",
+    "encounter_hooks": [
+      "Wind-scoured steps descend into a half-buried sun temple.",
+      "An oasis dries to cracked clay around a weathered marble statue.",
+      "A caravan banner flutters beside a sandstone archway in the dunes."
+    ]
+  },
+  {
+    "name": "Plains",
+    "atmosphere": "Vast rolling grasslands ripple in the wind around crumbling watch-beacons and ancient barrows.",
+    "encounter_hooks": [
+      "A stone barrow mound stands open beneath a circle of standing pillars.",
+      "Smoke rises from an abandoned courier post along the King's Road.",
+      "Broken shields mark the site of an old border skirmish."
+    ]
+  },
+  {
+    "name": "Snowfields",
+    "atmosphere": "Crisp white expanses stretch toward frozen peaks, hushed beneath drifting frost and aurora-lit clouds.",
+    "encounter_hooks": [
+      "A frozen hearth still holds faint embers inside a ruined lodge.",
+      "Ice-rimmed monoliths form a silent ring across the glacier.",
+      "Deep tracks in the snow lead toward a half-buried iron gate."
+    ]
+  }
+]

@@ -1,0 +1,78 @@
+[
+  {
+    "id": "hollow_guard",
+    "name": "Hollow Guard",
+    "description": "An animated suit of rusted plate armor bound by necrotic embers, patrolling forgotten ruins.",
+    "hp": 22,
+    "max_hp": 22,
+    "attack": 5,
+    "defense": 13,
+    "abilities": [
+      {
+        "name": "Halberd Sweep",
+        "description": "A wide, crushing arc with a corroded polearm.",
+        "power": 3,
+        "magic_cost": 0,
+        "cooldown_turns": 2
+      }
+    ],
+    "behavior": "steadfast_guardian"
+  },
+  {
+    "id": "thorn_stalker",
+    "name": "Thorn Stalker",
+    "description": "A gaunt, bark-skinned beast whose limbs bristle with venomous briars.",
+    "hp": 18,
+    "max_hp": 18,
+    "attack": 6,
+    "defense": 11,
+    "abilities": [
+      {
+        "name": "Briar Lunge",
+        "description": "Springs from cover to rake its target with barbed claws.",
+        "power": 2,
+        "magic_cost": 0,
+        "cooldown_turns": 1
+      }
+    ],
+    "behavior": "ambush_predator"
+  },
+  {
+    "id": "cinder_wisp",
+    "name": "Cinder Wisp",
+    "description": "A hovering sphere of pale witchfire that feeds on stray sparks of magic.",
+    "hp": 15,
+    "max_hp": 15,
+    "attack": 7,
+    "defense": 12,
+    "abilities": [
+      {
+        "name": "Searing Flare",
+        "description": "Releases a blinding pulse of arcane heat.",
+        "power": 4,
+        "magic_cost": 1,
+        "cooldown_turns": 2
+      }
+    ],
+    "behavior": "erratic_caster"
+  },
+  {
+    "id": "ashen_warden",
+    "name": "Ashen Warden",
+    "description": "A towering fallen knight clad in scorched obsidian mail, wielding a greatsword of grey iron.",
+    "hp": 28,
+    "max_hp": 28,
+    "attack": 6,
+    "defense": 14,
+    "abilities": [
+      {
+        "name": "Cinder Cleave",
+        "description": "Brings down a heavy greatsword wreathed in smoldering ash.",
+        "power": 4,
+        "magic_cost": 0,
+        "cooldown_turns": 2
+      }
+    ],
+    "behavior": "relentless_duelist"
+  }
+]
