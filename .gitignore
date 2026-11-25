@@ -41,6 +41,9 @@ desktop.ini
 .env.*
 *.key
 
+# Streamlit
+.streamlit/secrets.toml
+
 # Logs
 *.log
 logs/

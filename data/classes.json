@@ -1,0 +1,223 @@
+{
+  "Warrior": {
+    "character_class": "Warrior",
+    "hp": 32,
+    "max_hp": 32,
+    "attack": 5,
+    "defense": 4,
+    "magic": 1,
+    "weapon": {
+      "id": "iron_longsword",
+      "name": "Iron Longsword",
+      "slot": "weapon",
+      "description": "A balanced steel blade forged for frontline skirmishes.",
+      "attack_bonus": 2,
+      "defense_bonus": 0,
+      "magic_bonus": 0,
+      "heal_amount": 0,
+      "quantity": 1
+    },
+    "armor": {
+      "id": "chainmail_hauberk",
+      "name": "Chainmail Hauberk",
+      "slot": "armor",
+      "description": "Interlocking iron rings that turn aside blades and claws.",
+      "attack_bonus": 0,
+      "defense_bonus": 2,
+      "magic_bonus": 0,
+      "heal_amount": 0,
+      "quantity": 1
+    },
+    "accessory": {
+      "id": "iron_signet",
+      "name": "Iron Signet Ring",
+      "slot": "accessory",
+      "description": "A heavy band bearing the crest of the Border Watch.",
+      "attack_bonus": 0,
+      "defense_bonus": 1,
+      "magic_bonus": 0,
+      "heal_amount": 0,
+      "quantity": 1
+    },
+    "consumables": [
+      {
+        "id": "healing_potion",
+        "name": "Healing Potion",
+        "slot": "consumable",
+        "description": "A crimson draught that restores 10 HP when consumed.",
+        "attack_bonus": 0,
+        "defense_bonus": 0,
+        "magic_bonus": 0,
+        "heal_amount": 10,
+        "quantity": 2
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Shield Bash",
+        "description": "Strike with heavy momentum, dealing bonus physical damage and staggering the foe.",
+        "power": 3,
+        "magic_cost": 0,
+        "cooldown_turns": 2
+      },
+      {
+        "name": "Iron Resolve",
+        "description": "Brace against incoming blows, reducing damage taken on the next enemy strike.",
+        "power": 2,
+        "magic_cost": 0,
+        "cooldown_turns": 3
+      }
+    ]
+  },
+  "Archer": {
+    "character_class": "Archer",
+    "hp": 26,
+    "max_hp": 26,
+    "attack": 6,
+    "defense": 2,
+    "magic": 2,
+    "weapon": {
+      "id": "yew_longbow",
+      "name": "Yew Longbow",
+      "slot": "weapon",
+      "description": "A recurved yew bow strung with waxed sinew for accurate volleys.",
+      "attack_bonus": 2,
+      "defense_bonus": 0,
+      "magic_bonus": 0,
+      "heal_amount": 0,
+      "quantity": 1
+    },
+    "armor": {
+      "id": "ranger_leather",
+      "name": "Ranger Leather Jerkin",
+      "slot": "armor",
+      "description": "Supple boiled leather dyed forest green for silent movement.",
+      "attack_bonus": 0,
+      "defense_bonus": 1,
+      "magic_bonus": 0,
+      "heal_amount": 0,
+      "quantity": 1
+    },
+    "accessory": {
+      "id": "hawk_feather_charm",
+      "name": "Hawk Feather Charm",
+      "slot": "accessory",
+      "description": "A silver-bound talisman said to steady a marksman's aim.",
+      "attack_bonus": 1,
+      "defense_bonus": 0,
+      "magic_bonus": 0,
+      "heal_amount": 0,
+      "quantity": 1
+    },
+    "consumables": [
+      {
+        "id": "healing_potion",
+        "name": "Healing Potion",
+        "slot": "consumable",
+        "description": "A crimson draught that restores 10 HP when consumed.",
+        "attack_bonus": 0,
+        "defense_bonus": 0,
+        "magic_bonus": 0,
+        "heal_amount": 10,
+        "quantity": 2
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Piercing Shot",
+        "description": "Loose a high-velocity arrow that punches through enemy armor.",
+        "power": 4,
+        "magic_cost": 0,
+        "cooldown_turns": 2
+      },
+      {
+        "name": "Evasive Roll",
+        "description": "Vault clear of danger, boosting evasion and setting up a clean countershot.",
+        "power": 2,
+        "magic_cost": 0,
+        "cooldown_turns": 2
+      }
+    ]
+  },
+  "Mage": {
+    "character_class": "Mage",
+    "hp": 22,
+    "max_hp": 22,
+    "attack": 3,
+    "defense": 2,
+    "magic": 7,
+    "weapon": {
+      "id": "oak_runestaff",
+      "name": "Oak Runestaff",
+      "slot": "weapon",
+      "description": "An ancient oak staff carved with glowing arcane runes.",
+      "attack_bonus": 1,
+      "defense_bonus": 0,
+      "magic_bonus": 2,
+      "heal_amount": 0,
+      "quantity": 1
+    },
+    "armor": {
+      "id": "apprentice_robes",
+      "name": "Apprentice Robes",
+      "slot": "armor",
+      "description": "Woven wool robes lined with faint protective wards.",
+      "attack_bonus": 0,
+      "defense_bonus": 1,
+      "magic_bonus": 1,
+      "heal_amount": 0,
+      "quantity": 1
+    },
+    "accessory": {
+      "id": "sapphire_focus",
+      "name": "Sapphire Focus",
+      "slot": "accessory",
+      "description": "A faceted crystal pendant that amplifies arcane channeling.",
+      "attack_bonus": 0,
+      "defense_bonus": 0,
+      "magic_bonus": 1,
+      "heal_amount": 0,
+      "quantity": 1
+    },
+    "consumables": [
+      {
+        "id": "healing_potion",
+        "name": "Healing Potion",
+        "slot": "consumable",
+        "description": "A crimson draught that restores 10 HP when consumed.",
+        "attack_bonus": 0,
+        "defense_bonus": 0,
+        "magic_bonus": 0,
+        "heal_amount": 10,
+        "quantity": 1
+      },
+      {
+        "id": "starlight_tonic",
+        "name": "Starlight Tonic",
+        "slot": "consumable",
+        "description": "A shimmering vial that restores 6 HP and steadies the mind.",
+        "attack_bonus": 0,
+        "defense_bonus": 0,
+        "magic_bonus": 1,
+        "heal_amount": 6,
+        "quantity": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Arcane Bolt",
+        "description": "Hurl a concentrated lance of eldritch energy at a single target.",
+        "power": 5,
+        "magic_cost": 2,
+        "cooldown_turns": 1
+      },
+      {
+        "name": "Aegis Ward",
+        "description": "Weave a shimmering barrier of force that absorbs incoming damage.",
+        "power": 3,
+        "magic_cost": 2,
+        "cooldown_turns": 3
+      }
+    ]
+  }
+}

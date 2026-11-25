@@ -1,0 +1,134 @@
+[
+  {
+    "id": "iron_longsword",
+    "name": "Iron Longsword",
+    "slot": "weapon",
+    "description": "A balanced steel blade forged for frontline skirmishes.",
+    "attack_bonus": 2,
+    "defense_bonus": 0,
+    "magic_bonus": 0,
+    "heal_amount": 0,
+    "quantity": 1
+  },
+  {
+    "id": "yew_longbow",
+    "name": "Yew Longbow",
+    "slot": "weapon",
+    "description": "A recurved yew bow strung with waxed sinew for accurate volleys.",
+    "attack_bonus": 2,
+    "defense_bonus": 0,
+    "magic_bonus": 0,
+    "heal_amount": 0,
+    "quantity": 1
+  },
+  {
+    "id": "oak_runestaff",
+    "name": "Oak Runestaff",
+    "slot": "weapon",
+    "description": "An ancient oak staff carved with glowing arcane runes.",
+    "attack_bonus": 1,
+    "defense_bonus": 0,
+    "magic_bonus": 2,
+    "heal_amount": 0,
+    "quantity": 1
+  },
+  {
+    "id": "chainmail_hauberk",
+    "name": "Chainmail Hauberk",
+    "slot": "armor",
+    "description": "Interlocking iron rings that turn aside blades and claws.",
+    "attack_bonus": 0,
+    "defense_bonus": 2,
+    "magic_bonus": 0,
+    "heal_amount": 0,
+    "quantity": 1
+  },
+  {
+    "id": "ranger_leather",
+    "name": "Ranger Leather Jerkin",
+    "slot": "armor",
+    "description": "Supple boiled leather dyed forest green for silent movement.",
+    "attack_bonus": 0,
+    "defense_bonus": 1,
+    "magic_bonus": 0,
+    "heal_amount": 0,
+    "quantity": 1
+  },
+  {
+    "id": "apprentice_robes",
+    "name": "Apprentice Robes",
+    "slot": "armor",
+    "description": "Woven wool robes lined with faint protective wards.",
+    "attack_bonus": 0,
+    "defense_bonus": 1,
+    "magic_bonus": 1,
+    "heal_amount": 0,
+    "quantity": 1
+  },
+  {
+    "id": "iron_signet",
+    "name": "Iron Signet Ring",
+    "slot": "accessory",
+    "description": "A heavy band bearing the crest of the Border Watch.",
+    "attack_bonus": 0,
+    "defense_bonus": 1,
+    "magic_bonus": 0,
+    "heal_amount": 0,
+    "quantity": 1
+  },
+  {
+    "id": "hawk_feather_charm",
+    "name": "Hawk Feather Charm",
+    "slot": "accessory",
+    "description": "A silver-bound talisman said to steady a marksman's aim.",
+    "attack_bonus": 1,
+    "defense_bonus": 0,
+    "magic_bonus": 0,
+    "heal_amount": 0,
+    "quantity": 1
+  },
+  {
+    "id": "sapphire_focus",
+    "name": "Sapphire Focus",
+    "slot": "accessory",
+    "description": "A faceted crystal pendant that amplifies arcane channeling.",
+    "attack_bonus": 0,
+    "defense_bonus": 0,
+    "magic_bonus": 1,
+    "heal_amount": 0,
+    "quantity": 1
+  },
+  {
+    "id": "healing_potion",
+    "name": "Healing Potion",
+    "slot": "consumable",
+    "description": "A crimson draught that restores 10 HP when consumed.",
+    "attack_bonus": 0,
+    "defense_bonus": 0,
+    "magic_bonus": 0,
+    "heal_amount": 10,
+    "quantity": 1
+  },
+  {
+    "id": "starlight_tonic",
+    "name": "Starlight Tonic",
+    "slot": "consumable",
+    "description": "A shimmering vial that restores 6 HP and steadies the mind.",
+    "attack_bonus": 0,
+    "defense_bonus": 0,
+    "magic_bonus": 1,
+    "heal_amount": 6,
+    "quantity": 1
+  },
+  {
+    "id": "sunfire_vial",
+    "name": "Sunfire Vial",
+    "slot": "consumable",
+    "description": "An alchemical flask that can be hurled or uncorked for a burst of flame.",
+    "attack_bonus": 3,
+    "defense_bonus": 0,
+    "magic_bonus": 0,
+    "heal_amount": 0,
+    "quantity": 1
+  }
+]

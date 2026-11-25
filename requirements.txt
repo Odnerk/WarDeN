@@ -1,9 +1,5 @@
-# Core LlamaIndex
-llama-index-core
-
-# Ollama LLM integration
-llama-index-llms-ollama
-
-# HuggingFace embeddings
-llama-index-embeddings-huggingface
-sentence-transformers
+streamlit
+pydantic>=2.0
+python-statemachine
+openai
+pytest
