@@ -22,6 +22,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.dm_client import (
+    _load_luna_api_key,
     classify_free_text,
     generate_campaign_intro,
     generate_narration,
@@ -323,7 +324,7 @@ def test_fence_stripping_and_400_response_format_fallback() -> None:
 
 def test_live_luna6_smoke() -> None:
     """Test 4: Optional live Luna 6 API smoke test (skipped unless LUNA_API_KEY is set)."""
-    api_key = os.getenv("LUNA_API_KEY")
+    api_key = _load_luna_api_key()
     if not api_key:
         if pytest is not None:
             pytest.skip("LUNA_API_KEY not set; skipping live Luna 6 smoke test.")
@@ -356,7 +357,7 @@ def _run_standalone() -> int:
         fn()
         print(f"[PASS] {fn.__name__}")
 
-    if os.getenv("LUNA_API_KEY"):
+    if _load_luna_api_key():
         test_live_luna6_smoke()
         print("[PASS] test_live_luna6_smoke")
     else:
