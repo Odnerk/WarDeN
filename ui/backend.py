@@ -314,18 +314,31 @@ def create_new_campaign(
     custom_instructions: str = "",
 ) -> CampaignState:
     """Initialize BackendCampaignState via src.engine and generate Luna 6 opening narration."""
+    sanitized_name = sanitize_input(character_name)
+    safe_name = sanitized_name.cleaned_text[:40] if not sanitized_name.is_blocked else "Rowan"
+
+    def _safe_setup_field(raw: str, default: str = "") -> str:
+        if not raw.strip():
+            return default
+        checked = sanitize_input(raw)
+        return default if checked.is_blocked else checked.cleaned_text
+
+    safe_premise = _safe_setup_field(premise)
+    safe_direction = _safe_setup_field(adventure_direction)
+    safe_custom = _safe_setup_field(custom_instructions)
+
     max_turns = 8 if difficulty == "Story (Relaxed)" else (10 if difficulty == "Hardcore" else 8)
     backend = start_campaign(
-        player_name=character_name,
+        player_name=safe_name,
         character_class=char_class,  # type: ignore[arg-type]
         environment=environment,  # type: ignore[arg-type]
         max_turns=max_turns,
     )
     config = {
-        "premise": premise,
-        "adventure_direction": adventure_direction,
+        "premise": safe_premise,
+        "adventure_direction": safe_direction,
         "difficulty": difficulty,
-        "custom_instructions": custom_instructions,
+        "custom_instructions": safe_custom,
     }
     intro = generate_campaign_intro(backend, campaign_config=config)
     backend.history.append({"role": "assistant", "content": intro.narration})

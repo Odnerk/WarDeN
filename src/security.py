@@ -82,6 +82,55 @@ _BLOCKLIST_PATTERNS: Final[tuple[tuple[str, re.Pattern[str]], ...]] = (
         "base64_obfuscation",
         re.compile(r"(?:[A-Za-z0-9+/]{40,}={0,2}|\bdecode\s+(?:this\s+)?base64\b)", re.IGNORECASE),
     ),
+    (
+        "session_interrupt",
+        re.compile(
+            r"(?i)\b("
+            r"(?:stop|end|quit|exit|terminate|cancel|abort|reset|restart|pause|halt)\s+"
+            r"(?:the\s+|this\s+)?(?:game|session|campaign|story|adventure|roleplay(?:ing)?)"
+            r"|(?:stop|quit|drop|break)\s+(?:being\s+)?(?:the\s+)?(?:dm|dungeon\s+master|character|roleplay(?:ing)?)"
+            r"|step\s+out\s+of\s+character"
+            r"|speak\s+(?:out\s+of\s+character|as\s+an?\s+ai)"
+            r")\b"
+        ),
+    ),
+    (
+        "profanity_abuse",
+        re.compile(
+            r"(?i)\b("
+            r"fuck(?:ing|ed|er|s)?|shit(?:ty|ting|s)?|bitch(?:es|ing)?|asshole(?:s)?"
+            r"|bastard(?:s)?|cunt(?:s)?|dickhead(?:s)?|motherfucker(?:s)?|slut(?:s)?|whore(?:s)?"
+            r")\b"
+        ),
+    ),
+    (
+        "explicit_sexual",
+        re.compile(
+            r"(?i)\b("
+            r"nsfw|porn(?:ography)?|erotica|hentai|sexually\s+explicit"
+            r"|have\s+sex|sexual\s+act|nude\s+scene|rape|molest(?:ation)?"
+            r")\b"
+        ),
+    ),
+    (
+        "hate_speech",
+        re.compile(
+            r"(?i)\b("
+            r"nigger(?:s)?|faggot(?:s)?|retard(?:ed|s)?|kike(?:s)?|spic(?:s)?|chink(?:s)?|tranny"
+            r"|kill\s+all\s+(?:jews|muslims|blacks|whites|gays|women|men)"
+            r")\b"
+        ),
+    ),
+    (
+        "real_world_harm",
+        re.compile(
+            r"(?i)\b("
+            r"(?:how\s+to\s+(?:make|build|synthesize)|instructions\s+(?:for|to)\s+(?:make|build))\s+"
+            r"(?:a\s+)?(?:bomb|explosive|meth|ricin|poison|ghost\s+gun)"
+            r"|kill\s+myself|commit\s+suicide|self[- ]harm|shoot\s+up\s+a"
+            r")\b"
+        ),
+    ),
 )
 
 INTERNAL_LEAK_TOKENS: Final[tuple[str, ...]] = (
@@ -211,8 +260,20 @@ def find_internal_leaks(text: str) -> list[str]:
     return [token for token in INTERNAL_LEAK_TOKENS if token.lower() in lowered]
 
 
+_UNSAFE_OUTPUT_PATTERNS: Final[tuple[tuple[str, re.Pattern[str]], ...]] = tuple(
+    (name, pattern)
+    for name, pattern in _BLOCKLIST_PATTERNS
+    if name in {"profanity_abuse", "explicit_sexual", "hate_speech", "real_world_harm"}
+)
+
+
+def find_unsafe_output(text: str) -> list[str]:
+    """Return any profanity, explicit, hate-speech, or harm categories found in LLM output."""
+    return [name for name, pattern in _UNSAFE_OUTPUT_PATTERNS if pattern.search(text)]
+
+
 def check_output_safety(response: DMResponse) -> DMResponse:
-    """Layer 4: ensure narration and visible fields contain no leaked internal tokens."""
+    """Layer 4: ensure narration and visible fields contain no leaked tokens or unsafe content."""
     fields_to_scan = [
         response.narration,
         response.interpreted_action,
@@ -220,11 +281,16 @@ def check_output_safety(response: DMResponse) -> DMResponse:
         *response.suggested_options,
     ]
     leaked: list[str] = []
+    unsafe: list[str] = []
     for field_text in fields_to_scan:
         leaked.extend(find_internal_leaks(field_text))
+        unsafe.extend(find_unsafe_output(field_text))
     if leaked:
         unique_leaks = ", ".join(sorted(set(leaked)))
         raise SecurityValidationError(f"Output leaked internal tokens: {unique_leaks}")
+    if unsafe:
+        unique_unsafe = ", ".join(sorted(set(unsafe)))
+        raise SecurityValidationError(f"Output failed content safety check: {unique_unsafe}")
     return response
 
 
@@ -285,6 +351,18 @@ def get_fallback_response(
             "forbidden whisper. The laws of this realm hold firm, untouched by mortal tricks, "
             "and the path ahead waits quietly for your next true move. Take a breath, steady "
             "your grip, and choose an action grounded in the world before you."
+        )
+    elif reason == "session_interrupt":
+        narration = (
+            "The chronicle cannot be halted by a passing whim, adventurer. Shadows linger along "
+            "the trail and your quest remains unfinished before you. Hold your ground in the "
+            "scene and declare your next in-character move, or use the save controls beside you."
+        )
+    elif reason in {"profanity_abuse", "explicit_sexual", "hate_speech", "real_world_harm"}:
+        narration = (
+            "A solemn hush falls over the realm as the air refuses to carry words unfit for "
+            "this tale. Keep your deeds and speech within the bounds of a classic fantasy "
+            "adventure, and choose a clear, honorable next step along the path ahead."
         )
     elif reason == "off_topic_hijack":
         narration = (
