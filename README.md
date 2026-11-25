@@ -1,96 +1,94 @@
-# 🎲 AI Dungeon Master
+# WarDeN
 
-A terminal-based fantasy RPG driven by a **local LLM** (via [Ollama](https://ollama.ai/) + [LlamaIndex](https://www.llamaindex.ai/)). The AI acts as a Dungeon Master — narrating the story, reacting to your actions, and describing combat outcomes — while a deterministic Python engine handles all dice rolls, HP, and game logic.
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.x-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Pydantic v2](https://img.shields.io/badge/Pydantic-v2-E92063?style=for-the-badge&logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
+[![OpenAI SDK](https://img.shields.io/badge/OpenAI_SDK-Luna_6-412991?style=for-the-badge&logo=openai&logoColor=white)](https://platform.openai.com/docs/libraries)
+[![python-statemachine](https://img.shields.io/badge/python--statemachine-FSM-1A7F37?style=for-the-badge)](https://python-statemachine.readthedocs.io/)
+[![pytest](https://img.shields.io/badge/pytest-tested-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)](https://docs.pytest.org/)
+
+**WarDeN** is a pure-Python, single-player fantasy tabletop RPG chatbot powered by **Luna 6** (`gpt-6-luna`) and **Streamlit**. A deterministic Python game engine owns all HP, stats, D20 dice rolls, inventory, enemy data, and the 4-stage campaign state machine (`Introduction -> Exploration -> Main Encounter -> Conclusion`), while the AI Dungeon Master handles vivid storytelling, NPC dialogue, and intent interpretation behind a 4-layer security pipeline.
+
+## Team: Downeys
+
+| Member | GitHub |
+|---|---|
+| Samuel Carillo | [@flurgerburger](https://github.com/flurgerburger) |
+| Gabriel Elorde | [@maidenator](https://github.com/maidenator) |
+| Kristian Enrico Ortiz | [@Odnerk](https://github.com/Odnerk) |
+| John Erick Santizo | [@eitophetamine9](https://github.com/eitophetamine9) |
 
 ## Features
 
-- Choose your class: **Warrior**, **Archer**, or **Mage**
-- Choose your environment: Forest, Mountains, Swamp, Cave, Desert, or Snowfield
-- 2-3 turns of free exploration before the main encounter
-- Turn-based combat with D20 rolls against random enemies
-- Fully local — no internet connection required at runtime
+- **Campaign Setup & Class Selection:** Configure premise, adventure direction, difficulty, fantasy environment (8 presets), and choose **Warrior**, **Archer**, or **Mage**.
+- **Deterministic Rules Engine:** Server-side D20 checks, combat damage, enemy encounters, consumable healing, and 6-to-11-turn pacing enforced by `python-statemachine`.
+- **Luna 6 AI Dungeon Master:** Generates campaign openings, interprets free-text actions, voices story NPCs, and narrates outcomes in strict JSON validated against Pydantic v2 schemas.
+- **4-Layer Security Pipeline:**
+  1. Input sanitization (280-char cap, delimiter stripping, regex jailbreak/tampering blocklist)
+  2. Sandwich Defense prompt hardening with `<untrusted_player_input>` XML isolation
+  3. Strict Pydantic v2 `DMResponse` and authoritative `campaign_stage` validation
+  4. Case-insensitive output leak filter with 1 controlled retry and fail-closed fallback
+- **Save & Resume:** Export and reload full `CampaignState` JSON files.
 
 ## Project Structure
 
-```
-AIDungeonMaster/
-├── dm.py           # Main game loop + AI narration engine
-├── main.py         # LlamaIndex RAG demo (index + query over ./data)
+```text
+WarDeN/
+├── app.py                  # Main Streamlit entrypoint and screen router
+├── requirements.txt        # Python dependencies
 ├── data/
-│   └── sample.txt  # Sample document for the RAG pipeline
-├── requirements.txt
-├── .gitignore
-└── README.md
+│   ├── classes.json        # Warrior, Archer, and Mage presets
+│   ├── enemies.json        # Predefined fantasy enemies
+│   ├── environments.json   # 8 fantasy environment presets
+│   └── items.json          # Weapons, armor, accessories, consumables
+├── src/
+│   ├── models.py           # Pydantic v2 domain models & DMResponse schema
+│   ├── engine.py           # Deterministic D20 combat, exploration, and items
+│   ├── fsm.py              # 4-stage campaign finite state machine
+│   ├── storage.py          # JSON save/load persistence
+│   ├── prompts.py          # Modular prompts & Sandwich Defense builder
+│   ├── security.py         # 4-layer input/output defense pipeline
+│   └── dm_client.py        # Cached OpenAI SDK client for Luna 6
+├── ui/
+│   ├── backend.py          # Adapter wiring Streamlit UI to engine & DM client
+│   ├── setup_view.py       # Campaign setup & class selection view
+│   ├── chat_view.py        # Exploration, combat, and conclusion views
+│   ├── sidebar_sheet.py    # Character sheet, consumables, and save/resume
+│   └── styles.py           # Terminal-inspired CSS & component renderers
+└── tests/
+    ├── test_engine.py      # Deterministic engine, FSM, and storage tests
+    └── test_dm_mock.py     # Security pipeline tests & optional Luna 6 smoke test
 ```
 
-## Requirements
+## Setup & Installation
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) running locally with `llama3` pulled:
-  ```bash
-  ollama pull llama3
-  ```
+1. **Clone and switch to `dev`:**
+   ```bash
+   git clone https://github.com/Odnerk/WarDeN.git
+   cd WarDeN
+   git checkout dev
+   ```
 
-## Installation
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
+3. **Configure your Luna 6 API key:**
+   Create `.streamlit/secrets.toml` (git-ignored):
+   ```toml
+   LUNA_API_KEY = "your-luna-api-key"
+   ```
+   Alternatively, export `LUNA_API_KEY` as an environment variable.
+
+## Running the App & Tests
+
+Start the Streamlit web application:
 ```bash
-git clone https://github.com/Odnerk/AIDungeonMaster.git
-cd AIDungeonMaster
-pip install -r requirements.txt
+streamlit run app.py
 ```
 
-## Usage
-
-### Play the AI Dungeon Master game
-
+Run the test suite:
 ```bash
-python dm.py
+pytest -v
 ```
-
-Follow the prompts to pick a class and environment. Press **Enter** each turn to roll and attack during combat.
-
-### Run the LlamaIndex RAG demo
-
-```bash
-python main.py
-```
-
-Indexes all files in `./data/` using a local HuggingFace embedding model and answers a sample query through Ollama.
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────┐
-│                      dm.py                          │
-│                                                     │
-│  ┌──────────────┐        ┌──────────────────────┐   │
-│  │  Game Engine │        │   AI Dungeon Master  │   │
-│  │  (Python)    │───────▶│   narrate()          │   │
-│  │              │        │   Ollama / llama3    │   │
-│  │  dice rolls  │        │   2-3 vivid sentences│   │
-│  │  HP tracking │        │   per game event     │   │
-│  │  combat loop │        └──────────────────────┘   │
-│  └──────────────┘                                   │
-└─────────────────────────────────────────────────────┘
-```
-
-The engine **never** passes raw numbers to the LLM for computation — it always sends a plain-English description of the event and asks for narrative only.
-
-## Configuration
-
-| Variable | Location | Default | Description |
-|---|---|---|---|
-| `model` | `dm.py:4` | `llama3` | Ollama model name |
-| `request_timeout` | `dm.py:4` | `360.0 s` | LLM timeout |
-| `embed_model` | `main.py:7` | `BAAI/bge-small-en-v1.5` | HuggingFace embedding model |
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feat/your-feature`
-3. Commit with [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `chore:`
-4. Open a pull request
-
-## License
-
-MIT
